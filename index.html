@@ -6,27 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-signin-client_id" content="700898875837-r2iclsdfeae5kvff8ps3d3pbpb1i8iam.apps.googleusercontent.com">
   <title>SignIn Google</title>
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '445741283698233',
-        cookie     : true,
-        xfbml      : true,
-        version    : 'v12.0'
-      });
-        
-      FB.AppEvents.logPageView();   
-        
-    };
-  
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "https://connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
 </head>
 <body>
   <h3>SignIn Google</h3>
@@ -81,10 +60,61 @@
     });
   }
 
+  /* FACEBOOK */
+  
+  (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+  window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '445741283698233',
+        status     : true,
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v12.0'
+      });
+        
+      FB.AppEvents.logPageView();   
+        
+    };
+
   function checkLoginState() {
     FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
+      statusChangeCallback(response, function () {
+        
+      });
     });
+  }
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  function statusChangeCallback(response, callback) {
+    console.log(response);
+
+    if (response.status === 'connected') {
+      getFadebookData();
+    } else {
+      callback(false);
+    }
+  }
+
+  function facebookLogin() {
+    checkLoginState(function (response) {
+      if (!response) {
+        FB.login(function (response) {
+          if (response.status === 'connected') {
+            getFadebookData();
+          }
+        })
+      }
+    })
   }
 
 </script>
