@@ -10,10 +10,28 @@
 <body>
   <h3>SignIn Google</h3>
   <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+  <div>
+    <p>
+      Correo: <span id="correo"></span>
+    </p>
+    <p>
+      Full Name : <span id="fullname"></span>
+    </p>
+    <img src="" alt="Imagen de correo" id="imagen" />
+    <p>
+      ID: <span id="id"></span>
+    </p>
+  </div>
   <a href="#" onclick="signOut();">Sign out</a>
 </body>
 <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 <script>
+
+  const id = document.getElementById('id');
+  const correo = document.getElementById('correo');
+  const imagen = document.getElementById('imagen');
+  const fullname = document.getElementById('fullname');
 
   function init() {
     gapi.load('auth2', function() {
@@ -29,6 +47,10 @@
     console.log('Family Name: ' + profile.getFamilyName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());
+    fullname.textContent = profile.getName();
+    imagen.target.src = profile.getImageUrl();
+    id.textContent = profile.getId();
+    correo.textContent = profile.getEmail();
   }
 
   function signOut() {
