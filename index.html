@@ -30,7 +30,6 @@
 <body>
   <h3>SignIn Google</h3>
   <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
   <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
   </fb:login-button>
   <div>
@@ -81,16 +80,6 @@
   }
 
   /* FACEBOOK */
-
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
 
 </script>
 
