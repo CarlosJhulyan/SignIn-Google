@@ -60,6 +60,9 @@
     });
   }
 
+</script>
+
+<script>
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '445741283698233',
@@ -78,18 +81,7 @@
      js = d.createElement(s); js.id = id;
      js.src = "https://connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-
-  FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-  });
-
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
+  }(document, 'script', 'facebook-jssdk'));
 </script>
 
 </html>
