@@ -7,8 +7,19 @@
   <meta name="google-signin-client_id" content="700898875837-r2iclsdfeae5kvff8ps3d3pbpb1i8iam.apps.googleusercontent.com">
   <title>SignIn Google</title>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="index.js"></script>
+  <script src="index.js"></script>
+
+</head>
+<body>
+  <h3>SignIn Google</h3>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <a href="#" onclick="signOut();">Sign out</a>
+</body>
+
 <script>
+gapi.load('auth2', () => {
+  gapi.auth2.init();
+})
 
 function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
@@ -26,11 +37,5 @@ function signOut() {
 }
 
 </script>
-</head>
-<body>
-  <h3>SignIn Google</h3>
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
-  <a href="#" onclick="signOut();">Sign out</a>
-</body>
 
 </html>
