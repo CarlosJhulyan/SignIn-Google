@@ -65,14 +65,12 @@
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '445741283698233',
-      status     : true,
       cookie     : true,
       xfbml      : true,
       version    : 'v12.0'
     });
       
-    FB.AppEvents.logPageView();   
-      
+    FB.AppEvents.logPageView();
   };
 
   (function(d, s, id){
@@ -85,37 +83,13 @@
 
   function checkLoginState() {
     FB.getLoginStatus(function(response) {
-      statusChangeCallback(response, function () {
-        
-      });
+      statusChangeCallback(response);
     });
   }
 
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
   });
-
-  function statusChangeCallback(response, callback) {
-    console.log(response);
-
-    if (response.status === 'connected') {
-      getFadebookData();
-    } else {
-      callback(false);
-    }
-  }
-
-  function facebookLogin() {
-    checkLoginState(function (response) {
-      if (!response) {
-        FB.login(function (response) {
-          if (response.status === 'connected') {
-            getFadebookData();
-          }
-        })
-      }
-    })
-  }
 
 </script>
 
