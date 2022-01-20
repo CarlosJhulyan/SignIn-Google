@@ -6,38 +6,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-signin-client_id" content="700898875837-r2iclsdfeae5kvff8ps3d3pbpb1i8iam.apps.googleusercontent.com">
   <title>SignIn Google</title>
-  <script src="index.js"></script>
 </head>
 <body>
   <h3>SignIn Google</h3>
   <div class="g-signin2" data-onsuccess="onSignIn"></div>
   <a href="#" onclick="signOut();">Sign out</a>
 </body>
-<script src="https://apis.google.com/js/platform.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 <script>
-gapi.load('auth2', () => {
-  gapi.auth2.init({
-    client_id: '700898875837-r2iclsdfeae5kvff8ps3d3pbpb1i8iam.apps.googleusercontent.com'
-  })
-    .then(response => {
-      console.log(response);
+
+  function init() {
+    gapi.load('auth2', function() {
+      console.log('init');
     });
-})
+  }
+  
+  document.createElement().dataset.onsuccess();
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  }
 
-function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-}
-
-function signOut() {
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    console.log('User signed out.');
-  });
-}
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
 
 </script>
 
